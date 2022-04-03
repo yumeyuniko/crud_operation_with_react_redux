@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import TextField from './TextField';
+import { addUser } from './userSlice';
 
 const AddUser = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [values, setValues] = useState({
     name: '',
@@ -11,7 +14,15 @@ const AddUser = () => {
   });
   const handleAddUser = () => {
     setValues({ name: '', email: '' });
-    console.log(values);
+    // console.log(values);
+    dispatch(
+      addUser({
+        id: '3',
+        name: values.name,
+        email: values.email,
+      })
+    );
+
     navigate('/');
   };
   return (
